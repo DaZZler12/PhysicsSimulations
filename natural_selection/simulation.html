@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <title>Evolutionary Algorithm | Visualize It</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Materialize -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <script src="../helper.js" defer></script>
+  <script src="basic.js" defer></script>
+  <script src="user_input.js" defer></script>
+  <script src="Source.js" defer></script>
+  <script src="Target.js" defer></script>
+  <script src="Gene.js" defer></script>
+  <script src="Boid.js" defer></script>
+  <script src="Wall.js" defer></script>
+  <script src="natural_selection.js" defer></script>
+
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../style.css" />
+</head>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M95CKRP8HB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { window.dataLayer.push(arguments); }
+  gtag('js', new Date());
+
+  gtag('config', 'G-M95CKRP8HB');
+</script>
+
+<body>
+  <nav class="nav-extended" style="background:black; margin-top: 0mm">
+    <div class="nav-wrapper">
+      <h1 id="main-heading">Visualize It</h1>
+    </div>
+    <div class="nav-content">
+      <ul class="tabs tabs-transparent tabs-fixed-width">
+        <li class="tab"><a href="../index.html">Home</a></li>
+        <li class="tab"><a href="../about.html">About</a></li>
+      </ul>
+    </div>
+  </nav>
+</body>
+<div class="text">
+  <h2>Evolutionary Algorithm</h2>
+
+  <p>This simulation uses survival of the fittest to determine the gene pool of the next generation of boids. All boids
+    emerge from the blue circle (source). Fitness is calculated based on how close a boid gets towards the red circle
+    (target). The boids also need to avoid colliding with the wall or the borders. The higher the fitness of a boid, the
+    more chances that it's genes are present in the next generation of boids. The genes of a boid determine it's motion
+    during it's entire lifespan.
+  </p>
+  <div class="container" style="width: 100%">
+    <div class="row">
+      <div class="col s12 l8">
+        <center>
+          <canvas id="canvas"></canvas>
+          <br> <br>
+          Gene with maximum fitness:
+          <br>
+          <canvas id="gene-canvas"></canvas>
+        </center>
+      </div>
+      <div class="col s12 l4">
+        <center>
+          <p id="generation-display"></p>
+          <hr>
+          <p id="fitness-display"></p>
+          <hr>
+          <br>
+          <b>Drag an entity to change it's location</b>
+          <br> <br>
+          <button class="btn purple darken-4" onclick="addWall('h')">Add Horizontal wall</button>
+          <br> <br>
+          <button class="btn purple darken-4" onclick="addWall('v')">Add Vertical wall</button>
+          <br> <br>
+          <button class="btn purple darken-4" onclick="clearWalls()">Clear walls</button>
+          <br> <br>
+          <hr>
+          <br>
+          <button id="pause-button" class="btn purple darken-4" onclick="pauseToggle()">Pause</button>
+          <br> <br>
+          <button class="btn purple darken-4" onclick="initialize()">Restart Evolution</button>
+        </center>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <hr>
+
+  <h3>Layouts</h3>
+
+  <div class="container" style="width: 100%">
+    <div class="row">
+      <div class="col s12 l4">
+        <center>
+          <h4>Detour</h4>
+          <img class="responsive-img" src="default.png">
+          <button class="btn purple darken-4" onclick="layouts('detour')">Load</button>
+        </center>
+      </div>
+      <div class="col s12 l4">
+        <center>
+          <h4>Simple</h4>
+          <img class="responsive-img" src="simple.png">
+          <button class="btn purple darken-4" onclick="layouts('simple')">Load</button>
+        </center>
+      </div>
+      <div class="col s12 l4">
+        <center>
+          <h4>Default</h4>
+          <img class="responsive-img" src="detour.png">
+          <button class="btn purple darken-4" onclick="layouts('default')">Load</button>
+        </center>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <hr />
+  <br />
+
+  <b>Note:</b>
+
+  <ol>
+    <li>If evolution is taking longer than usual, or if the boids have gone down a irrecoverable/fruitless path of
+      evolution, then please consider restarting the evolution by clicking the last button</li>
+    <li>Changing the location of the source, target or the obstacles during the course of evolution will redirect it's
+      course. Boids will eventually adapt to the new conditions</li>
+    <li>Each boid has a lifespan of 500 frames. A boid that collides with the obstacle or the walls of the space is
+      considered as dead</li>
+  </ol>
+
+  <br>
+  <hr>
+  <br>
+
+  <p class="center-align">Developed by ChanRT | Fork me at <a href="https://www.github.com/chanrt">GitHub</a></p>
+</div>
+
+</html>
